@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_examples/examples/example_base.dart';
 import 'package:flutter_examples/examples/example_column.dart';
 import 'package:flutter_examples/examples/example_row.dart';
+import 'package:flutter_examples/examples/example_row_fixed.dart';
 import 'package:flutter_examples/examples/example_row_percent.dart';
+import 'package:flutter_examples/examples/example_stream.dart';
 import 'package:flutter_examples/widgets/theme_button.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,16 +18,16 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-
   static const examples = {
     "Base": ExampleBase(),
     "Column": ExampleColumn(),
     "Row": ExampleRow(),
     "Row Percent": ExampleRowPercent(),
+    "Row Center Fixed": ExampleRowFixed(),
+    "Stream": ExampleStream(),
   };
 
   var currentExample = "Column";
-  
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +40,19 @@ class MainScreenState extends State<MainScreen> {
       ),
       drawer: Drawer(
         child: ListView(
-          children: examples.entries.map((e) => 
-            ListTile(
-              title: Text(e.key),
-              onTap: () {
-                setState(() {
-                  currentExample = e.key;
-                });
-                Navigator.pop(context);
-              },
-            ),
-          ).toList(),
+          children: examples.entries
+              .map(
+                (e) => ListTile(
+                  title: Text(e.key),
+                  onTap: () {
+                    setState(() {
+                      currentExample = e.key;
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+              )
+              .toList(),
         ),
       ),
       body: examples[currentExample],
